@@ -1,5 +1,5 @@
-#include <cstring>
-#include <cstdio>
+#pragma once
+
 #include "common.h"
 
-void ParseCommand(Target* host, const char* input);
+void ParseCommand(Target* target, CliState* cli, const char* input);

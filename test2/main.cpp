@@ -1,33 +1,34 @@
 ﻿#include "app.h"
+#include "command.h"
 
-int main()
-{
-	Target host{};
-	char input[MAX_INPUT]{};
-	char prompt[256]{};
+#include <cstdio>
+#include <cstring>
 
-	InitApp(&host);
+int main() {
+    Target target{};
+    CliState cli{};
+    char input[MAX_INPUT]{};
+    char prompt[MAX_PROMPT]{};
 
-	std::printf("ITSecurity community project\n");
-	std::printf("Type \'help\' to see all commands\n\n");
+    InitApp(&target, &cli);
+    PrintBanner();
 
-	while (&host) {
-		CommandLine(&host, prompt, sizeof(prompt));
-		std::printf("%s", prompt);
+    while (true) {
+        BuildPrompt(&cli, prompt, sizeof(prompt));
+        std::printf("%s", prompt);
 
-		if (std::fgets(input, sizeof(input), stdin) == nullptr) {
-			break;
-		}
+        if (std::fgets(input, sizeof(input), stdin) == nullptr) {
+            break;
+        }
 
-		input[std::strcspn(input, "\r\n")] = '\0';
-		
-		if (input[0] == '\0') {
-			continue;
-		}
+        input[std::strcspn(input, "\r\n")] = '\0';
 
-		ParseCommand(&host, input);
+        if (input[0] == '\0') {
+            continue;
+        }
 
-	}
+        ParseCommand(&target, &cli, input);
+    }
 
-	return 0;
+    return 0;
 }

@@ -1,17 +1,19 @@
+#pragma once
+
 #include "common.h"
-#include "command.h"
 
+void InitApp(Target* target, CliState* cli);
+void BuildPrompt(const CliState* cli, char* line, std::size_t lineSize);
 
-void InitApp(Target* host);
+void PrintBanner();
+void PrintHelp();
+void PrintStatus(const Target* target, const CliState* cli);
 
-void CommandLine(const Target* host, char* line, size_t lineSize);
-void CommandHelp();
-void CommandSetTarget(Target* host, const char* target);
-void CommandSetPort(Target* host, const char* port);
-void CommandSetUsername(Target* host, const char* username);
-void CommandSetPassword(Target* host, const char* password);
-void CommandStatus(const Target* host);
-void CommandClearTarget(Target* host);
+void CommandSetTargetHost(Target* target, const char* value);
+void CommandSetTargetPort(Target* target, const char* value);
+void CommandSetTargetUsername(Target* target, const char* value);
+void CommandSetTargetPassword(Target* target, const char* value);
+void CommandSetTargetDomain(Target* target, const char* value);
+void CommandClearTarget(Target* target);
 
-int check_ipv4(const char* data);
-int check_port(const char* data);
+bool IsBlank(const char* text);
