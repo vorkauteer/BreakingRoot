@@ -18,7 +18,6 @@ constexpr int DEFAULT_PORT = 0;
 enum class ModuleDomain {
     None = 0,
     Core,
-    Target,
     Recon,
     Creds,
     Session,
@@ -68,6 +67,15 @@ enum class CliContext {
     Module
 };
 
+enum class PostModule {
+    None = 0,
+    LsassAccess,
+    PowerShellExec,
+    ScheduledTask,
+    RegistryAutoRun,
+    SignedProxy
+};
+
 struct Target {
     char host[MAX_HOST];
     int port;
@@ -84,6 +92,7 @@ struct CliState {
     CredsModule currentCreds{ CredsModule::None };
     SessionModule currentSession{ SessionModule::None };
     ConfigModule currentConfig{ ConfigModule::None };
+    PostModule currentPost{ PostModule::None };
 
     bool verbose{ false };
 };
