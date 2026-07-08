@@ -501,7 +501,6 @@ void CommandPowerShellEncoded(Target* target, CliState* cli, const char* command
     snprintf(cmdLine, sizeof(cmdLine),
         "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand %s",
         base64A);
-    printf("%s", base64A);
     delete[] base64A;
 
     STARTUPINFOA si = { sizeof(si) };
